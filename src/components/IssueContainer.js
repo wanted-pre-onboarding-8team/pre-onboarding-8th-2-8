@@ -1,15 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { getIssue } from 'apis/issue';
+import IssueList from './IssueList';
 
-const IssueContainer = ({ title }) => {
-  useEffect(() => {
-    getIssue();
-  }, []);
-
+const IssueContainer = ({ title, issueList }) => {
   return (
     <Container>
       <Title>{title}</Title>
+      {issueList.map(issue => (
+        <IssueList key={issue.num} issueInfo={issue} />
+      ))}
     </Container>
   );
 };

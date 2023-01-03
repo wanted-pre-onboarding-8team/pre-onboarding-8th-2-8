@@ -1,13 +1,19 @@
 import IssueContainer from 'components/IssueContainer';
+import useIssue from 'hooks/useIssue';
 import React from 'react';
 import styled from 'styled-components';
 
 const Main = () => {
+  const { issueList } = useIssue();
+  const todos = issueList.filter(issueList => issueList.state === 'todo');
+  const workings = issueList.filter(issueList => issueList.state === 'working');
+  const completes = issueList.filter(issueList => issueList.state === 'complete');
+
   return (
     <MainWrapper>
-      <IssueContainer title={'할 일'} />
-      <IssueContainer title={'작업 중'} />
-      <IssueContainer title={'완료'} />
+      <IssueContainer title={'할 일'} issueList={todos} />
+      <IssueContainer title={'작업 중'} issueList={workings} />
+      <IssueContainer title={'완료'} issueList={completes} />
     </MainWrapper>
   );
 };

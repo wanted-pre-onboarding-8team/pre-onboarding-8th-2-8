@@ -1,28 +1,28 @@
 {
-    "issueList": [
-        {
-            "num": 1,
-            "title": "title",
-            "contents": "contents",
-            "deadline": "YYYY-MM-DDhh:mm",
-            "state": "todo",
-            "person": "preson"
-        },
-        {
-            "num": 2,
-            "title": "title",
-            "contents": "contents",
-            "deadline": "YYYY-MM-DDhh:mm",
-            "state": "working",
-            "person": "preson"
-        },
-        {
-            "num": 3,
-            "title": "title",
-            "contents": "contents",
-            "deadline": "YYYY-MM-DDhh:mm",
-            "state": "complete",
-            "person": "preson"
-        }
-    ]
+  "issueList": [
+    {
+      "num": 1,
+      "title": "title",
+      "contents": "contents",
+      "deadline": "YYYY-MM-DDhh:mm",
+      "state": "todo",
+      "person": "preson"
+    },
+    {
+      "num": 2,
+      "title": "title",
+      "contents": "contents",
+      "deadline": "YYYY-MM-DDhh:mm",
+      "state": "working",
+      "person": "preson"
+    },
+    {
+      "num": 3,
+      "title": "title",
+      "contents": "contents",
+      "deadline": "YYYY-MM-DDhh:mm",
+      "state": "complete",
+      "person": "preson"
+    }
+  ]
 }
