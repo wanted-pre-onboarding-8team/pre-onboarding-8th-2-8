@@ -1,3 +1,4 @@
+import CloseIcon from './CloseIcon';
 import PlusIcon from './PlusIcon';
 
-export { PlusIcon };
+export { PlusIcon, CloseIcon };
