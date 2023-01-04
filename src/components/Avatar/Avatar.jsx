@@ -1,7 +1,16 @@
-const Avatar = ({ user, url, size = '50px' }) => {
+const Avatar = ({ users, owner, size = '50px', ...rest }) => {
+  const user = users.find(user => user.owner === owner);
+
   return (
     <>
-      <img src={url} width={size} height={size} alt={user} style={{ borderRadius: '50px' }} />
+      <img
+        src={user.profileImage}
+        width={size}
+        height={size}
+        alt={user.owner}
+        style={{ borderRadius: '50px' }}
+        {...rest}
+      />
     </>
   );
 };
