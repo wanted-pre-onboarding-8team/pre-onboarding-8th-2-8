@@ -4,16 +4,23 @@ import { CloseIcon } from 'components/Icons';
 
 import * as S from './Card.style';
 
-const Card = ({ id, title, owner, profileImage }) => {
+const Card = ({ id, title, owner, profileImage, handleDragging }) => {
   const [deleteTodo] = useDeleteTodoMutation();
+
   // Card 에 대한 Skeleton Ui 구현 필요
 
   const handleSubmit = () => {
     deleteTodo(id);
   };
 
+  const handleDragStart = e => {
+    e.dataTransfer.setData('text', `${id}`);
+    handleDragging(true);
+  };
+  const handleDragEnd = () => handleDragging(false);
+
   return (
-    <S.CardContainer>
+    <S.CardContainer draggable onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
       {/* IssueCard Header */}
       <S.CardHeader>
         <span># {id}</span>
