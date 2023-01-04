@@ -1,9 +1,8 @@
 import Card from 'components/Card/Card';
-import { Suspense } from 'react';
 
 import * as S from './Lane.style';
 
-const Lane = ({ todos, currentStatus, isDragging, handleDragging, handleUpdateList }) => {
+const Lane = ({ currentStatus, todos, isDragging, handleDragging, handleUpdateList, setReplaceId }) => {
   // Lane 에 대한 Skeleton Ui 구현 필요
 
   const handleDrop = e => {
@@ -24,21 +23,20 @@ const Lane = ({ todos, currentStatus, isDragging, handleDragging, handleUpdateLi
       <S.TitleContainer>
         <S.Title>{currentStatus}</S.Title>
       </S.TitleContainer>
-      <Suspense fallback={<div>loading...</div>}>
-        {todos?.map(
-          ({ title, id, owner, profileImage, status }) =>
-            status === currentStatus && (
-              <Card
-                key={id}
-                title={title}
-                id={id}
-                owner={owner}
-                profileImage={profileImage}
-                handleDragging={handleDragging}
-              />
-            ),
-        )}
-      </Suspense>
+      {todos.map(
+        ({ title, id, owner, profileImage, status }) =>
+          status === currentStatus && (
+            <Card
+              key={id}
+              title={title}
+              id={id}
+              owner={owner}
+              profileImage={profileImage}
+              handleDragging={handleDragging}
+              setReplaceId={setReplaceId}
+            />
+          ),
+      )}
     </S.Container>
   );
 };

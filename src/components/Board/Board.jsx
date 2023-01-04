@@ -2,37 +2,34 @@ import { useAddTodosMutation } from 'apis/apiSlice';
 import { PlusIcon } from 'components/Icons';
 import Lane from 'components/Lane/Lane';
 import { useDragAndDrop } from 'hooks/useDragAndDrop';
-import { useState } from 'react';
 
 import * as S from './Board.style';
 
 const TYPES = ['TODOS', 'IN PROGRESS', 'DONE'];
 
 const Board = ({ todos, children }) => {
-  const [_, setNewTodo] = useState('');
-  _;
+  const arr = Object.assign([], todos);
+  const lastIndex = arr.sort((a, b) => a.id - b.id).at(-1).id + 1;
   const [addTodo] = useAddTodosMutation();
   const handleSubmit = () => {
     addTodo({
-      id: 23,
-      title: 'new',
-      contents: 'dasd',
-      deadline: 'sd-MM-DDhh:mm',
-      status: 'sd',
-      owner: 'Keonhee Lee',
+      id: lastIndex,
+      title: 'title',
+      contents: 'contents',
+      deadline: 'YYYY-MM-DDhh:mm',
+      status: 'TODOS',
+      owner: 'JunHyuck Lim',
       profileImage: '',
     });
-
-    setNewTodo('');
   };
-  const { isDragging, listItems, handleDragging, handleUpdateList } = useDragAndDrop(todos);
+  const { isDragging, handleDragging, handleUpdateList, setReplaceId } = useDragAndDrop(todos);
 
   return (
     <S.Wrapper>
       <S.HeaderContainer>
         <S.Header>Kanban board</S.Header>
         <PlusIcon onClick={() => handleSubmit()} />
-        <span>create</span>
+        <span style={{ marginLeft: '10px' }}>Create Issue</span>
       </S.HeaderContainer>
       <S.KanbanContainer>
         {TYPES.map((title, i) => (
@@ -41,9 +38,9 @@ const Board = ({ todos, children }) => {
             currentStatus={title}
             todos={todos}
             isDragging={isDragging}
-            listItems={listItems}
             handleDragging={handleDragging}
             handleUpdateList={handleUpdateList}
+            setReplaceId={setReplaceId}
           />
         ))}
       </S.KanbanContainer>

@@ -1,17 +1,18 @@
-import { useDeleteTodoMutation } from 'apis/apiSlice';
+import { useDeleteTodoMutation, useGetUsersQuery } from 'apis/apiSlice';
 import Avatar from 'components/Avatar/Avatar';
 import { CloseIcon } from 'components/Icons';
+import SkeletonAvatar from 'components/Skeleton/SkeletonAvatar';
 
 import * as S from './Card.style';
 
-const Card = ({ id, title, owner, profileImage, handleDragging }) => {
+// Card 에 대한 Skeleton Ui 구현 필요
+
+const Card = ({ id, title, owner, handleDragging, setReplaceId }) => {
+  const { data: users, isLoading } = useGetUsersQuery();
+
   const [deleteTodo] = useDeleteTodoMutation();
 
-  // Card 에 대한 Skeleton Ui 구현 필요
-
-  const handleSubmit = () => {
-    deleteTodo(id);
-  };
+  const handleSubmit = () => deleteTodo(id);
 
   const handleDragStart = e => {
     e.dataTransfer.setData('text', `${id}`);
@@ -20,7 +21,12 @@ const Card = ({ id, title, owner, profileImage, handleDragging }) => {
   const handleDragEnd = () => handleDragging(false);
 
   return (
-    <S.CardContainer draggable onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+    <S.CardContainer
+      draggable
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+      onDragEnter={() => setReplaceId(id)}
+    >
       {/* IssueCard Header */}
       <S.CardHeader>
         <span># {id}</span>
@@ -31,9 +37,7 @@ const Card = ({ id, title, owner, profileImage, handleDragging }) => {
         <span>{title}</span>
       </S.CardBody>
       {/* Issue Footer */}
-      <S.CardFooter>
-        <Avatar url={profileImage} alt={owner} size="30px" />
-      </S.CardFooter>
+      <S.CardFooter>{isLoading ? <SkeletonAvatar /> : <Avatar users={users} owner={owner} size="30px" />}</S.CardFooter>
     </S.CardContainer>
   );
 };
