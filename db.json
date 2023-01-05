@@ -20,7 +20,7 @@
     {
       "id": 3,
       "title": "title",
-      "contents": "contents",
+      "contents": "내용",
       "deadline": "2023-01-01T10:10",
       "state": "complete",
       "person": "홍길",
