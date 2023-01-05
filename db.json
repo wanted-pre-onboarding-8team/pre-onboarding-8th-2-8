@@ -3,7 +3,7 @@
     {
       "id": 1,
       "title": "title",
-      "contents": "contents",
+      "contents": "내용",
       "deadline": "2023-01-01T10:10",
       "state": "todo",
       "person": "임준혁"
@@ -14,7 +14,8 @@
       "contents": "contents",
       "deadline": "2023-01-01T10:10",
       "state": "working",
-      "person": "person"
+      "person": "perso",
+      "content": "contents"
     },
     {
       "id": 3,
@@ -22,7 +23,8 @@
       "contents": "contents",
       "deadline": "2023-01-01T10:10",
       "state": "complete",
-      "person": "person"
+      "person": "홍길",
+      "content": "contents"
     }
   ]
 }

@@ -1,23 +1,23 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { SET_ISSUE_DETAIL } from 'slices/issueSlice';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import S from './Input.Styled';
 
 const InputState = () => {
-  const dispatch = useDispatch();
   const { ISSUE_DETAIL } = useSelector(state => state.issue);
+  const [issueState, setIssueState] = useState(ISSUE_DETAIL.state);
 
-  const onChangeState = e => {
-    dispatch(SET_ISSUE_DETAIL({ ...ISSUE_DETAIL, state: e.target.value }));
+  // 클릭 시 이슈 상태 변경
+  const onClickChangeState = e => {
+    setIssueState(e.target.value);
   };
 
   return (
     <S.FlexContainer>
       <S.DetailTitle>이슈 상태</S.DetailTitle>
-      <Input value="todo" onClick={onChangeState} disabled={ISSUE_DETAIL.state === 'todo'} />
-      <Input value="working" onClick={onChangeState} disabled={ISSUE_DETAIL.state === 'working'} />
-      <Input value="complete" onClick={onChangeState} disabled={ISSUE_DETAIL.state === 'complete'} />
+      <Input value="todo" onClick={onClickChangeState} disabled={issueState === 'todo'} />
+      <Input value="working" onClick={onClickChangeState} disabled={issueState === 'working'} />
+      <Input value="complete" onClick={onClickChangeState} disabled={issueState === 'complete'} />
     </S.FlexContainer>
   );
 };

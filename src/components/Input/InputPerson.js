@@ -1,49 +1,31 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { PERSON } from 'constants/person';
+import useInput from 'hooks/useInput';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import S from './Input.Styled';
-import { PERSON } from 'constants/person';
 
 const InputPerson = () => {
   const { ISSUE_DETAIL } = useSelector(state => state.issue);
-  const [person, setPerson] = useState('');
+  const [person, setPerson] = useInput(ISSUE_DETAIL.person);
   const [searchResult, setSearchResult] = useState([]);
 
-  // 이슈 상세정보 담당자 value 정하기
+  // 담당자 이름 바뀔 시 담당자 검색
   useEffect(() => {
-    setPerson(ISSUE_DETAIL.person);
-  }, []);
-
-  // 담당자 검색어 입력
-  const onInputPerson = useCallback(e => {
-    e.preventDefault();
-    setPerson(e.target.value);
-    onSearchPerson(e.target.value);
-  }, []);
-
-  // 담당자 찾기
-  const onSearchPerson = searchValue => {
-    const filteringPerson = PERSON.filter(name => name.includes(searchValue));
-    setSearchResult(filteringPerson);
-  };
-
-  // 담당자 박스 클릭
-  const onClickChangeInputValue = e => {
-    setPerson(e.target.innerHTML);
-  };
+    const filterPerson = PERSON.filter(name => name.includes(person));
+    setSearchResult(filterPerson);
+  }, [person]);
 
   return (
     <>
       <S.FlexContainer>
         <S.DetailTitle>이슈 담당자</S.DetailTitle>
-        <Input placeholder="이슈 담당자.." value={person} onChange={onInputPerson} />
+        <Input name="person" placeholder="이슈 담당자.." value={person} onChange={setPerson} />
       </S.FlexContainer>
       {searchResult !== (null || undefined) && (
         <PersonContainer>
           {searchResult.map(person => (
-            <PersonDiv key={person} onClick={onClickChangeInputValue}>
-              {person}
-            </PersonDiv>
+            <PersonDiv key={person}>{person}</PersonDiv>
           ))}
         </PersonContainer>
       )}

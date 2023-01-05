@@ -1,18 +1,19 @@
 import useIssue from 'hooks/useIssue';
 import React, { useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { SET_SHOW_ISSUE_DETAIL_FLAG } from 'slices/issueSlice';
 import styled from 'styled-components';
-import InputContent from './Input/InputContent';
-import InputDeadline from './Input/InputDeadline';
-import InputPerson from './Input/InputPerson';
-import InputState from './Input/InputState';
-import InputTitle from './Input/InputTitle';
+import InputContent from '../Input/InputContent';
+import InputDeadline from '../Input/InputDeadline';
+import InputPerson from '../Input/InputPerson';
+// import InputState from './Input/InputState';
+import InputTitle from '../Input/InputTitle';
 
 const IssueDetailModal = () => {
   const dispatch = useDispatch();
   const modalRef = useRef();
   const { handlePatchIssue } = useIssue();
+  const { ISSUE_DETAIL } = useSelector(state => state.issue, shallowEqual);
 
   // 이슈 상세정보 모달 창 외부 클릭 시 모달 창 끄기
   const handleClickOutside = e => {
@@ -27,9 +28,14 @@ const IssueDetailModal = () => {
     };
   });
 
-  // 이슈 상세정보 업데이트
-  const onClickPatchIssue = () => {
-    handlePatchIssue();
+  const onPatchIssue = () => {
+    const id = ISSUE_DETAIL.id;
+    const title = document.getElementsByName('title')[0].value;
+    const content = document.getElementsByName('content')[0].value;
+    const deadline = document.getElementsByName('deadline')[0].value;
+    const person = document.getElementsByName('person')[0].value;
+
+    handlePatchIssue({ id, title, content, deadline, person });
     dispatch(SET_SHOW_ISSUE_DETAIL_FLAG(false));
   };
 
@@ -39,9 +45,8 @@ const IssueDetailModal = () => {
       <InputTitle />
       <InputContent />
       <InputDeadline />
-      <InputState />
       <InputPerson />
-      <SubmitButton onClick={onClickPatchIssue}>저장</SubmitButton>
+      <SubmitButton onClick={onPatchIssue}>저장</SubmitButton>
     </DetailContainer>
   );
 };

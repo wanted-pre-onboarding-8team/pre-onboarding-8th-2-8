@@ -1,6 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+  ISSUE_LIST: {
+    TODOS: [],
+    WORKINGS: [],
+    COMPLETES: [],
+  },
   // 이슈의 상세정보
   ISSUE_DETAIL: {
     num: undefined,
@@ -18,6 +23,11 @@ const issueSlice = createSlice({
   name: 'issue',
   initialState,
   reducers: {
+    SET_ISSUE_LIST(state, action) {
+      state.ISSUE_LIST.TODOS = action.payload.todos;
+      state.ISSUE_LIST.WORKINGS = action.payload.workings;
+      state.ISSUE_LIST.COMPLETES = action.payload.completes;
+    },
     SET_ISSUE_DETAIL(state, action) {
       state.ISSUE_DETAIL = action.payload;
     },
@@ -30,6 +40,7 @@ const issueSlice = createSlice({
   },
 });
 
-export const { SET_ISSUE_DETAIL, SET_SHOW_ISSUE_DETAIL, SET_SHOW_ISSUE_DETAIL_FLAG } = issueSlice.actions;
+export const { SET_ISSUE_LIST, SET_ISSUE_DETAIL, SET_SHOW_ISSUE_DETAIL, SET_SHOW_ISSUE_DETAIL_FLAG } =
+  issueSlice.actions;
 
 export default issueSlice;

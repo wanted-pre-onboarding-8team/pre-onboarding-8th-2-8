@@ -10,14 +10,14 @@ const IssueList = ({ issueInfo }) => {
   const { handleShowDetailIssue } = useIssue();
 
   // 클릭 시 이슈의 상세정보를 보여줌
-  const onShowDetail = e => {
-    handleShowDetailIssue(e.currentTarget.childNodes[0].innerHTML);
+  const onShowDetail = () => {
+    handleShowDetailIssue(id, state);
     dispatch(SET_SHOW_ISSUE_DETAIL_FLAG(true));
   };
 
   return (
     <List onClick={onShowDetail} draggable>
-      <div>{id}</div>
+      <div>고유번호 : {id}</div>
       <div>제목 : {title}</div>
       <div>내용 : {contents}</div>
       <div>마감일 : {deadline}</div>
