@@ -1,6 +1,6 @@
-import { getIssue, patchIssue } from 'apis/issue';
+import { addIssue, getIssue, patchIssue } from 'apis/issue';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_ISSUE_LIST, SET_SHOW_ISSUE_DETAIL } from 'slices/issueSlice';
+import { SET_ISSUE_DETAIL, SET_ISSUE_LIST } from 'slices/issueSlice';
 
 const useIssue = () => {
   const dispatch = useDispatch();
@@ -29,9 +29,13 @@ const useIssue = () => {
     };
 
     // 찾은 이슈 상세정보를 Redux에 저장
-    if (state === 'todo') dispatch(SET_SHOW_ISSUE_DETAIL(ISSUE_LIST.TODOS.find(findId)));
-    else if (state === 'working') dispatch(SET_SHOW_ISSUE_DETAIL(ISSUE_LIST.WORKINGS.find(findId)));
-    else if (state === 'complete') dispatch(SET_SHOW_ISSUE_DETAIL(ISSUE_LIST.COMPLETES.find(findId)));
+    if (state === 'todo') dispatch(SET_ISSUE_DETAIL(ISSUE_LIST.TODOS.find(findId)));
+    else if (state === 'working') dispatch(SET_ISSUE_DETAIL(ISSUE_LIST.WORKINGS.find(findId)));
+    else if (state === 'complete') dispatch(SET_ISSUE_DETAIL(ISSUE_LIST.COMPLETES.find(findId)));
+  };
+
+  const handleAddIssue = issueInfo => {
+    addIssue(issueInfo).then(() => handleGetIssue());
   };
 
   const handlePatchIssue = async changePoint => {
@@ -39,7 +43,7 @@ const useIssue = () => {
     handleGetIssue();
   };
 
-  return { handleGetIssue, handleShowDetailIssue, handlePatchIssue };
+  return { handleGetIssue, handleShowDetailIssue, handleAddIssue, handlePatchIssue };
 };
 
 export default useIssue;

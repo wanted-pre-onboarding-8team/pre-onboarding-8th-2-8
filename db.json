@@ -14,8 +14,7 @@
       "contents": "contents",
       "deadline": "2023-01-01T10:10",
       "state": "working",
-      "person": "perso",
-      "content": "contents"
+      "person": "perso"
     },
     {
       "id": 3,
@@ -23,8 +22,23 @@
       "contents": "내용",
       "deadline": "2023-01-01T10:10",
       "state": "complete",
-      "person": "홍길",
-      "content": "contents"
+      "person": "홍길동"
+    },
+    {
+      "id": 4,
+      "title": "4",
+      "contents": "4",
+      "deadline": "2023-01-06T02:24",
+      "state": "todo",
+      "person": "4"
+    },
+    {
+      "id": 5,
+      "title": "5",
+      "contents": "5",
+      "deadline": "2023-01-06T02:24",
+      "state": "working",
+      "person": "5"
     }
   ]
 }

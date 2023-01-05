@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+
 import S from './Input.Styled';
 
-const InputState = () => {
+const InputState = ({ bringState }) => {
   const { ISSUE_DETAIL } = useSelector(state => state.issue);
   const [issueState, setIssueState] = useState(ISSUE_DETAIL.state);
 
   // 클릭 시 이슈 상태 변경
   const onClickChangeState = e => {
     setIssueState(e.target.value);
+    bringState(e.target.value);
   };
 
   return (

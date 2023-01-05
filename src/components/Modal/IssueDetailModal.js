@@ -17,12 +17,13 @@ const IssueDetailModal = () => {
   const { handlePatchIssue } = useIssue();
   const { ISSUE_DETAIL } = useSelector(state => state.issue, shallowEqual);
 
+  // 이슈 모달 창 외부 클릭 시 모달 창 끄기 이벤트 등록 및 삭제
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  });
+  }, []);
 
   const onPatchIssue = () => {
     const id = ISSUE_DETAIL.id;
