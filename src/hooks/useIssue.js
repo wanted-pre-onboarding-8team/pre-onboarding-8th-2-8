@@ -38,9 +38,8 @@ const useIssue = () => {
     addIssue(issueInfo).then(() => handleGetIssue());
   };
 
-  const handlePatchIssue = async changePoint => {
-    await patchIssue(changePoint);
-    handleGetIssue();
+  const handlePatchIssue = changePoint => {
+    patchIssue(changePoint).then(() => handleGetIssue());
   };
 
   return { handleGetIssue, handleShowDetailIssue, handleAddIssue, handlePatchIssue };
