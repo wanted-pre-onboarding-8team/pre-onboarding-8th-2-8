@@ -7,13 +7,12 @@ import UsersList from './UsersList';
 
 const IssueModalContent = ({ todos }) => {
   const { data: users } = useGetUsersQuery();
-  const [updateTodo] = useUpdateTodoMutation();
   const { currentIssueId, handleUnmountModal } = useModal();
-  const { formData, handleChange, handleSubmit } = useForm({ title, content });
-
   const todo = todos.find(todo => todo.id === currentIssueId);
   const { content, deadline, owner, status, title } = todo;
+  const { formData, handleChange, handleSubmit } = useForm({ title, content });
 
+  const [updateTodo] = useUpdateTodoMutation();
   const handleUpdateTodo = () => updateTodo({ ...todo, ...formData });
 
   return (
