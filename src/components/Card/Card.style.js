@@ -11,6 +11,8 @@ const CardContainer = styled.div`
   background-color: ${({ theme }) => theme.backgroundLightest};
   border-radius: 10px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.18);
+
+  cursor: pointer;
 `;
 
 // Header

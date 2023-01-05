@@ -1,8 +1,7 @@
 import { useDeleteTodoMutation, useGetUsersQuery } from 'apis/apiSlice';
-import Avatar from 'components/Avatar/Avatar';
+import { Avatar, SkeletonAvatar } from 'components/@commons';
 import { CloseIcon } from 'components/Icons';
-import SkeletonAvatar from 'components/Skeleton/SkeletonAvatar';
-import useModal from 'hooks/useModal';
+import { useModal } from 'hooks';
 import { showIssueModal } from 'slices/modalSlice';
 
 import * as S from './Card.style';
@@ -22,28 +21,35 @@ const Card = ({ id, title, owner, handleDragging, setReplaceId }) => {
   };
   const handleDragEnd = () => handleDragging(false);
 
-  const { handleMountModal } = useModal();
+  const { handleMountModal, setCurrentIssueId } = useModal();
 
   return (
-    <S.CardContainer
-      draggable
-      onDragStart={handleDragStart}
-      onDragEnd={handleDragEnd}
-      onDragEnter={() => setReplaceId(id)}
-      onClick={() => handleMountModal(showIssueModal)}
-    >
-      {/* IssueCard Header */}
-      <S.CardHeader>
-        <span># {id}</span>
-        <CloseIcon onClick={() => handleSubmit()} />
-      </S.CardHeader>
-      {/* Issue Body */}
-      <S.CardBody>
-        <span>{title}</span>
-      </S.CardBody>
-      {/* Issue Footer */}
-      <S.CardFooter>{isLoading ? <SkeletonAvatar /> : <Avatar users={users} owner={owner} size="30px" />}</S.CardFooter>
-    </S.CardContainer>
+    <>
+      <S.CardContainer
+        draggable
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
+        onDragEnter={() => setReplaceId(id)}
+        onClick={() => {
+          handleMountModal(showIssueModal);
+          setCurrentIssueId(id);
+        }}
+      >
+        {/* IssueCard Header */}
+        <S.CardHeader>
+          <span># {id}</span>
+          <CloseIcon onClick={() => handleSubmit()} />
+        </S.CardHeader>
+        {/* Issue Body */}
+        <S.CardBody>
+          <span>{title}</span>
+        </S.CardBody>
+        {/* Issue Footer */}
+        <S.CardFooter>
+          {isLoading ? <SkeletonAvatar /> : <Avatar users={users} owner={owner} size="30px" />}
+        </S.CardFooter>
+      </S.CardContainer>
+    </>
   );
 };
 

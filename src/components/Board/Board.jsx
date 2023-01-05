@@ -3,8 +3,7 @@ import { PlusIcon } from 'components/Icons';
 import Lane from 'components/Lane/Lane';
 import { CreateTodoContent, IssueModalContent, Modal } from 'components/Modal';
 import { STATUS_TYPES } from 'constants';
-import { useDragAndDrop } from 'hooks/useDragAndDrop';
-import useModal from 'hooks/useModal';
+import { useDragAndDrop, useModal } from 'hooks';
 import { showCreateModal } from 'slices/modalSlice';
 
 import * as S from './Board.style';
@@ -27,8 +26,8 @@ const Board = ({ todos, children }) => {
 
   handleSubmit;
 
-  const { isDragging, handleDragging, handleUpdateList, setReplaceId } = useDragAndDrop(todos);
   const { createModalOpen, issueModalOpen, handleMountModal } = useModal();
+  const { isDragging, handleDragging, handleUpdateList, setReplaceId } = useDragAndDrop(todos);
 
   return (
     <S.Wrapper>
@@ -51,8 +50,9 @@ const Board = ({ todos, children }) => {
         ))}
       </S.KanbanContainer>
       {children}
-
-      <Modal>{createModalOpen ? <CreateTodoContent /> : issueModalOpen ? <IssueModalContent /> : null}</Modal>
+      <Modal>
+        {createModalOpen ? <CreateTodoContent /> : issueModalOpen ? <IssueModalContent todos={todos} /> : null}
+      </Modal>
     </S.Wrapper>
   );
 };
