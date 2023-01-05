@@ -29,7 +29,7 @@
       "title": "4",
       "contents": "4",
       "deadline": "2023-01-06T02:24",
-      "state": "todo",
+      "state": "complete",
       "person": "4"
     },
     {
@@ -37,7 +37,7 @@
       "title": "5",
       "contents": "5",
       "deadline": "2023-01-06T02:24",
-      "state": "working",
+      "state": "complete",
       "person": "5"
     }
   ]

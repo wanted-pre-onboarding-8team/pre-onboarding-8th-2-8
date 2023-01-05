@@ -25,9 +25,9 @@ const Main = () => {
   return (
     <Suspense fallback={'...Loading'}>
       <MainWrapper>
-        <IssueContainer title={'할 일'} issueList={ISSUE_LIST.TODOS} />
-        <IssueContainer title={'작업 중'} issueList={ISSUE_LIST.WORKINGS} />
-        <IssueContainer title={'완료'} issueList={ISSUE_LIST.COMPLETES} />
+        <IssueContainer id="todo" title={'할 일'} issueList={ISSUE_LIST.TODOS} />
+        <IssueContainer id="working" title={'작업 중'} issueList={ISSUE_LIST.WORKINGS} />
+        <IssueContainer id="complete" title={'완료'} issueList={ISSUE_LIST.COMPLETES} />
       </MainWrapper>
       <ShowAddIssue onClick={onClickAddIssueModal}>이슈 추가하기</ShowAddIssue>
       {SHOW_ISSUE_DETAIL_FLAG && <IssueDetailModal />}

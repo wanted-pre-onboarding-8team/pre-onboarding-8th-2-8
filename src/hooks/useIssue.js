@@ -6,7 +6,7 @@ const useIssue = () => {
   const dispatch = useDispatch();
   const { ISSUE_LIST } = useSelector(state => state.issue);
 
-  // 이슈 가져오고 state에 따라 나누기
+  // 이슈 가져오고 state에 따라 나누기 CRUD - R
   const handleGetIssue = () => {
     getIssue().then(res => {
       const issueList = res.data;
@@ -34,10 +34,11 @@ const useIssue = () => {
     else if (state === 'complete') dispatch(SET_ISSUE_DETAIL(ISSUE_LIST.COMPLETES.find(findId)));
   };
 
+  // 이슈 추가 CRUD - C
   const handleAddIssue = issueInfo => {
     addIssue(issueInfo).then(() => handleGetIssue());
   };
-
+  // 이슈 상세내용 변경 CRUD - U
   const handlePatchIssue = changePoint => {
     patchIssue(changePoint).then(() => handleGetIssue());
   };

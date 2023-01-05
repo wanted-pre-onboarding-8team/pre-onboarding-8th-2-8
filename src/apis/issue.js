@@ -8,6 +8,6 @@ export const addIssue = async issue => {
   return await client.post('/issueList', issue);
 };
 
-export const patchIssue = changePoint => {
-  return client.patch(`/issueList/${changePoint.id}`, changePoint);
+export const patchIssue = async changePoint => {
+  return await client.patch(`/issueList/${changePoint.id}`, changePoint);
 };

@@ -20,6 +20,8 @@ const initialState = {
   SHOW_ISSUE_DETAIL_FLAG: false,
   // 이슈 추가 창을 띄울지 말지 정하는 플래그
   SHOW_ADD_ISSUE_FLAG: false,
+  // 드래그한 이슈 정보 저장
+  DRAG_ISSUE_INFO: {},
 };
 
 const issueSlice = createSlice({
@@ -40,9 +42,13 @@ const issueSlice = createSlice({
     SET_ADD_ISSUE_FLAG(state, action) {
       state.SHOW_ADD_ISSUE_FLAG = action.payload;
     },
+    SET_DRAG_ISSUE_INFO(state, action) {
+      state.DRAG_ISSUE_INFO = action.payload;
+    },
   },
 });
 
-export const { SET_ISSUE_LIST, SET_ISSUE_DETAIL, SET_SHOW_ISSUE_DETAIL_FLAG, SET_ADD_ISSUE_FLAG } = issueSlice.actions;
+export const { SET_ISSUE_LIST, SET_ISSUE_DETAIL, SET_SHOW_ISSUE_DETAIL_FLAG, SET_ADD_ISSUE_FLAG, SET_DRAG_ISSUE_INFO } =
+  issueSlice.actions;
 
 export default issueSlice;
