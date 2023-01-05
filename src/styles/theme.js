@@ -11,6 +11,7 @@ const color = {
   textLight: '#8993a4',
   textLink: '#0052cc',
 
+  backgroundWhite: '#fff',
   backgroundDarkPrimary: '#0747A6',
   backgroundMedium: '#dfe1e6',
   backgroundLight: '#ebecf0',

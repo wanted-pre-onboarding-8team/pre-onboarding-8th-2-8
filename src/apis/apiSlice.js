@@ -6,7 +6,6 @@ export const apiSlice = createApi({
   endpoints: builder => ({
     getTodos: builder.query({
       query: () => '/issueList',
-      transformResponse: todos => todos.sort((a, b) => a.id - b.id),
       providesTags: ['Todos'],
     }),
     addTodos: builder.mutation({
@@ -15,6 +14,7 @@ export const apiSlice = createApi({
         method: 'POST',
         body: todo,
       }),
+      // transformResponse: todos => todos.sort((a, b) => a.id - b.id),
       invalidatesTags: ['Todos'],
     }),
     updateTodo: builder.mutation({
@@ -33,7 +33,12 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ['Todos'],
     }),
+    getUsers: builder.query({
+      query: () => '/userList',
+      providesTags: ['Users'],
+    }),
   }),
 });
 
-export const { useGetTodosQuery, useAddTodosMutation, useUpdateTodoMutation, useDeleteTodoMutation } = apiSlice;
+export const { useGetTodosQuery, useAddTodosMutation, useUpdateTodoMutation, useDeleteTodoMutation, useGetUsersQuery } =
+  apiSlice;
