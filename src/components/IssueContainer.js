@@ -6,8 +6,8 @@ const IssueContainer = ({ title, issueList }) => {
   return (
     <Container>
       <Title>{title}</Title>
-      {issueList.map(issue => (
-        <IssueList key={issue.num} issueInfo={issue} />
+      {issueList?.map(issue => (
+        <IssueList key={issue.id} issueInfo={issue} />
       ))}
     </Container>
   );

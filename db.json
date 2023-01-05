@@ -1,28 +1,28 @@
 {
   "issueList": [
     {
-      "num": 1,
+      "id": 1,
       "title": "title",
       "contents": "contents",
-      "deadline": "YYYY-MM-DDhh:mm",
+      "deadline": "2023-01-01T10:10",
       "state": "todo",
-      "person": "preson"
+      "person": "임준혁"
     },
     {
-      "num": 2,
+      "id": 2,
       "title": "title",
       "contents": "contents",
-      "deadline": "YYYY-MM-DDhh:mm",
+      "deadline": "2023-01-01T10:10",
       "state": "working",
-      "person": "preson"
+      "person": "person"
     },
     {
-      "num": 3,
+      "id": 3,
       "title": "title",
       "contents": "contents",
-      "deadline": "YYYY-MM-DDhh:mm",
+      "deadline": "2023-01-01T10:10",
       "state": "complete",
-      "person": "preson"
+      "person": "person"
     }
   ]
 }
