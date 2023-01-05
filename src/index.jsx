@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { store } from 'store/configureStore';
+import store from 'store/configureStore';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyles, theme } from 'styles';
 
@@ -11,12 +11,12 @@ const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
 
 root.render(
-  <React.StrictMode>
+  <>
     <ThemeProvider theme={theme}>
       <Provider store={store}>
         <App />
       </Provider>
     </ThemeProvider>
     <GlobalStyles />
-  </React.StrictMode>,
+  </>,
 );

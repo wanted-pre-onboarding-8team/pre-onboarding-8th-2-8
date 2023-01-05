@@ -2,6 +2,8 @@ import { useDeleteTodoMutation, useGetUsersQuery } from 'apis/apiSlice';
 import Avatar from 'components/Avatar/Avatar';
 import { CloseIcon } from 'components/Icons';
 import SkeletonAvatar from 'components/Skeleton/SkeletonAvatar';
+import useModal from 'hooks/useModal';
+import { showIssueModal } from 'slices/modalSlice';
 
 import * as S from './Card.style';
 
@@ -20,12 +22,15 @@ const Card = ({ id, title, owner, handleDragging, setReplaceId }) => {
   };
   const handleDragEnd = () => handleDragging(false);
 
+  const { handleMountModal } = useModal();
+
   return (
     <S.CardContainer
       draggable
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       onDragEnter={() => setReplaceId(id)}
+      onClick={() => handleMountModal(showIssueModal)}
     >
       {/* IssueCard Header */}
       <S.CardHeader>

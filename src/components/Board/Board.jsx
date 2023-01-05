@@ -1,11 +1,13 @@
 import { useAddTodosMutation } from 'apis/apiSlice';
 import { PlusIcon } from 'components/Icons';
 import Lane from 'components/Lane/Lane';
+import { CreateTodoContent, IssueModalContent, Modal } from 'components/Modal';
+import { STATUS_TYPES } from 'constants';
 import { useDragAndDrop } from 'hooks/useDragAndDrop';
+import useModal from 'hooks/useModal';
+import { showCreateModal } from 'slices/modalSlice';
 
 import * as S from './Board.style';
-
-const TYPES = ['TODOS', 'IN PROGRESS', 'DONE'];
 
 const Board = ({ todos, children }) => {
   const arr = Object.assign([], todos);
@@ -22,17 +24,21 @@ const Board = ({ todos, children }) => {
       profileImage: '',
     });
   };
+
+  handleSubmit;
+
   const { isDragging, handleDragging, handleUpdateList, setReplaceId } = useDragAndDrop(todos);
+  const { createModalOpen, issueModalOpen, handleMountModal } = useModal();
 
   return (
     <S.Wrapper>
       <S.HeaderContainer>
         <S.Header>Kanban board</S.Header>
-        <PlusIcon onClick={() => handleSubmit()} />
+        <PlusIcon onClick={() => handleMountModal(showCreateModal)} />
         <span style={{ marginLeft: '10px' }}>Create Issue</span>
       </S.HeaderContainer>
       <S.KanbanContainer>
-        {TYPES.map((title, i) => (
+        {STATUS_TYPES.map((title, i) => (
           <Lane
             key={i}
             currentStatus={title}
@@ -45,6 +51,8 @@ const Board = ({ todos, children }) => {
         ))}
       </S.KanbanContainer>
       {children}
+
+      <Modal>{createModalOpen ? <CreateTodoContent /> : issueModalOpen ? <IssueModalContent /> : null}</Modal>
     </S.Wrapper>
   );
 };
