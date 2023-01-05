@@ -35,34 +35,52 @@ const ModalWrapper = styled.div`
 `;
 
 // Header
-const ModalHeader = styled.div`
+const Header = styled.div`
   display: flex;
-  justify-content: space-between;
-  padding-right: 5px;
-  padding-top: 5px;
+  flex-direction: row;
 
-  height: 30%;
+  margin-bottom: 30px;
+
+  height: 10%;
+`;
+
+const IssueNumber = styled.span`
+  font-size: 25px;
+  margin-right: 30px;
 `;
 
 // Body
-const ModalBody = styled.div`
-  width: 85%;
-  height: 30%;
 
-  margin-left: 10px;
+const BodyContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+const BodyLeft = styled.div`
+  width: 70%;
+  height: 70%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+`;
+
+const BodyRight = styled(BodyLeft)`
+  width: 30%;
+
+  justify-content: space-around;
+  align-items: center;
+  min-height: 300px;
 `;
 
 // Footer
-const ModalFooter = styled.div`
+const Footer = styled.div`
   height: 30%;
 
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: flex-end;
 `;
 
-export { ModalBackground, ModalWrapper, ModalHeader, ModalBody, ModalFooter };
+export { ModalBackground, IssueNumber, ModalWrapper, Header, BodyContainer, BodyLeft, BodyRight, Footer };
