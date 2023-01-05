@@ -6,22 +6,17 @@ import { showIssueModal } from 'slices/modalSlice';
 
 import * as S from './Card.style';
 
-// Card 에 대한 Skeleton Ui 구현 필요
-
 const Card = ({ id, title, owner, handleDragging, setReplaceId }) => {
   const { data: users, isLoading } = useGetUsersQuery();
-
   const [deleteTodo] = useDeleteTodoMutation();
-
-  const handleSubmit = () => deleteTodo(id);
+  const { handleMountModal, setCurrentIssueId } = useModal();
 
   const handleDragStart = e => {
     e.dataTransfer.setData('text', `${id}`);
     handleDragging(true);
   };
   const handleDragEnd = () => handleDragging(false);
-
-  const { handleMountModal, setCurrentIssueId } = useModal();
+  const handleSubmit = () => deleteTodo(id);
 
   return (
     <>
@@ -30,22 +25,30 @@ const Card = ({ id, title, owner, handleDragging, setReplaceId }) => {
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
         onDragEnter={() => setReplaceId(id)}
-        onClick={() => {
-          handleMountModal(showIssueModal);
-          setCurrentIssueId(id);
-        }}
       >
         {/* IssueCard Header */}
         <S.CardHeader>
           <span># {id}</span>
-          <CloseIcon onClick={() => handleSubmit()} />
+          <div onClick={() => handleSubmit()}>
+            <CloseIcon />
+          </div>
         </S.CardHeader>
         {/* Issue Body */}
-        <S.CardBody>
+        <S.CardBody
+          onClick={() => {
+            handleMountModal(showIssueModal);
+            setCurrentIssueId(id);
+          }}
+        >
           <span>{title}</span>
         </S.CardBody>
         {/* Issue Footer */}
-        <S.CardFooter>
+        <S.CardFooter
+          onClick={() => {
+            handleMountModal(showIssueModal);
+            setCurrentIssueId(id);
+          }}
+        >
           {isLoading ? <SkeletonAvatar /> : <Avatar users={users} owner={owner} size="30px" />}
         </S.CardFooter>
       </S.CardContainer>

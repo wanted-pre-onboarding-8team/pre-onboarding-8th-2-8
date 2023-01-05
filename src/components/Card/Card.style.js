@@ -22,15 +22,19 @@ const CardHeader = styled.div`
   padding-right: 5px;
   padding-top: 5px;
 
+  border-bottom: 1px dashed gray;
+
   height: 30%;
+
+  cursor: auto;
 `;
 
 // Body
 const CardBody = styled.div`
-  width: 85%;
+  display: flex;
+  padding-top: 10px;
+  align-items: center;
   height: 30%;
-
-  margin-left: 10px;
 
   overflow: hidden;
   text-overflow: ellipsis;
@@ -39,7 +43,8 @@ const CardBody = styled.div`
 
 // Footer
 const CardFooter = styled.div`
-  height: 30%;
+  width: 100%;
+  height: 40%;
 
   display: flex;
   align-items: center;

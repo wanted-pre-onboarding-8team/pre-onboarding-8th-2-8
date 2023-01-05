@@ -1,28 +1,52 @@
 {
-    "issueList": [
-        {
-            "num": 1,
-            "title": "title",
-            "contents": "contents",
-            "deadline": "YYYY-MM-DDhh:mm",
-            "state": "todo",
-            "person": "preson"
-        },
-        {
-            "num": 2,
-            "title": "title",
-            "contents": "contents",
-            "deadline": "YYYY-MM-DDhh:mm",
-            "state": "working",
-            "person": "preson"
-        },
-        {
-            "num": 3,
-            "title": "title",
-            "contents": "contents",
-            "deadline": "YYYY-MM-DDhh:mm",
-            "state": "complete",
-            "person": "preson"
-        }
-    ]
+  "userList": [
+    {
+      "userId": 1,
+      "owner": "Keonhee Lee",
+      "profileImage": "https://avatars.githubusercontent.com/u/83988230?v=4"
+    },
+    {
+      "userId": 2,
+      "owner": "Hyojin Kwon",
+      "profileImage": "https://avatars.githubusercontent.com/u/100255414?v=4"
+    },
+    {
+      "userId": 3,
+      "owner": "Heesoo Kim",
+      "profileImage": "https://avatars.githubusercontent.com/u/16986867?v=4"
+    },
+    {
+      "userId": 4,
+      "owner": "MinKyung Shin",
+      "profileImage": "https://avatars.githubusercontent.com/u/80238096?v=4"
+    },
+    {
+      "userId": 5,
+      "owner": "JeongWon Kim",
+      "profileImage": "https://avatars.githubusercontent.com/u/108037773?v=4"
+    },
+    {
+      "userId": 6,
+      "owner": "JunHyuck Lim",
+      "profileImage": "https://avatars.githubusercontent.com/u/67939901?v=4"
+    }
+  ],
+  "issueList": [
+    {
+      "id": 2,
+      "title": "asdsdasdsada",
+      "content": "asdasdasda",
+      "dueDate": "2023-01-06T11:51",
+      "status": "TODOS",
+      "owner": "Keonhee Lee"
+    },
+    {
+      "id": 3,
+      "title": "asdasd",
+      "content": "asdasd",
+      "dueDate": "2023-01-06T11:54",
+      "status": "TODOS",
+      "owner": "Keonhee Lee"
+    }
+  ]
 }

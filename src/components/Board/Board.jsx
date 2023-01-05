@@ -1,4 +1,4 @@
-import { useAddTodosMutation } from 'apis/apiSlice';
+import { useGetUsersQuery } from 'apis/apiSlice';
 import { PlusIcon } from 'components/Icons';
 import Lane from 'components/Lane/Lane';
 import { CreateTodoContent, IssueModalContent, Modal } from 'components/Modal';
@@ -9,22 +9,7 @@ import { showCreateModal } from 'slices/modalSlice';
 import * as S from './Board.style';
 
 const Board = ({ todos, children }) => {
-  const arr = Object.assign([], todos);
-  const lastIndex = arr.sort((a, b) => a.id - b.id).at(-1).id + 1;
-  const [addTodo] = useAddTodosMutation();
-  const handleSubmit = () => {
-    addTodo({
-      id: lastIndex,
-      title: 'title',
-      contents: 'contents',
-      deadline: 'YYYY-MM-DDhh:mm',
-      status: 'TODOS',
-      owner: 'JunHyuck Lim',
-      profileImage: '',
-    });
-  };
-
-  handleSubmit;
+  const { data: users } = useGetUsersQuery();
 
   const { createModalOpen, issueModalOpen, handleMountModal } = useModal();
   const { isDragging, handleDragging, handleUpdateList, setReplaceId } = useDragAndDrop(todos);
@@ -51,7 +36,11 @@ const Board = ({ todos, children }) => {
       </S.KanbanContainer>
       {children}
       <Modal>
-        {createModalOpen ? <CreateTodoContent /> : issueModalOpen ? <IssueModalContent todos={todos} /> : null}
+        {createModalOpen ? (
+          <CreateTodoContent todos={todos} users={users} />
+        ) : issueModalOpen ? (
+          <IssueModalContent todos={todos} users={users} />
+        ) : null}
       </Modal>
     </S.Wrapper>
   );

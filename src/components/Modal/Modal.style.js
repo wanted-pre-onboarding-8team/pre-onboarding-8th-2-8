@@ -69,7 +69,7 @@ const BodyLeft = styled.div`
 const BodyRight = styled(BodyLeft)`
   width: 30%;
 
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
   min-height: 300px;
 `;

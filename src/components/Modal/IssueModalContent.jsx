@@ -1,15 +1,14 @@
-import { useGetUsersQuery, useUpdateTodoMutation } from 'apis/apiSlice';
+import { useUpdateTodoMutation } from 'apis/apiSlice';
 import { AutoComplete, Avatar, Button, Flex, Form } from 'components/@commons';
 import { useForm, useModal } from 'hooks';
 
 import * as S from './Modal.style';
 import UsersList from './UsersList';
 
-const IssueModalContent = ({ todos }) => {
-  const { data: users } = useGetUsersQuery();
+const IssueModalContent = ({ todos, users }) => {
   const { currentIssueId, handleUnmountModal } = useModal();
-  const todo = todos.find(todo => todo.id === currentIssueId);
-  const { content, deadline, owner, status, title } = todo;
+  const todo = todos?.find(todo => todo.id === currentIssueId);
+  const { content, dueDate, owner, status, title } = todo;
   const { formData, handleChange, handleSubmit } = useForm({ title, content });
 
   const [updateTodo] = useUpdateTodoMutation();
@@ -39,13 +38,18 @@ const IssueModalContent = ({ todos }) => {
               }}
             />
           </div>
-          <span>{deadline}</span>
+          <span>{dueDate}</span>
         </S.BodyLeft>
         <S.BodyRight>
-          <span>현재 상태</span>
-          <span>{status}</span>
-          <span>담당자 선택</span>
-          <AutoComplete list={users} ListComponent={UsersList} todo={todo} />
+          <Flex flexDirection="column" alignItems="center" css={{ marginBottom: '100px' }}>
+            <span>현재 상태</span>
+            <span>{status}</span>
+          </Flex>
+          <Flex flexDirection="column" alignItems="center">
+            <span>담당자 선택</span>
+            <AutoComplete list={users} ListComponent={UsersList} todo={todo} />
+          </Flex>
+
           <Flex
             flexDirection="column"
             justifyContent="flex-end"

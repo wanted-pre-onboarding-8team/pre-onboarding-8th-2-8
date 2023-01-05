@@ -1,9 +1,13 @@
 import { useState } from 'react';
 
-const useForm = ({ title = '', content = '' }) => {
+import useIssueForm from './useIssueForm';
+
+const useForm = ({ title = '', content = '', owner = '' }) => {
+  const { issueState, handleSetIssueDetail } = useIssueForm();
   const [formData, setFormData] = useState({
     title,
     content,
+    owner,
   });
 
   const handleChange = e => {
@@ -12,6 +16,8 @@ const useForm = ({ title = '', content = '' }) => {
       ...prevState,
       [name]: value,
     }));
+
+    handleSetIssueDetail({ ...issueState, [name]: value });
   };
 
   const handleSubmit = (e, callback) => {
