@@ -1,4 +1,4 @@
-import useIssue from 'hooks/useIssue';
+import { useUpdateTodoMutation } from 'apis/apiSlice';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -6,8 +6,8 @@ import styled from 'styled-components';
 import IssueList from './IssueList';
 
 const IssueContainer = ({ id, title, issueList }) => {
-  const { DRAG_ISSUE_INFO } = useSelector(state => state.issue);
-  const { handlePatchIssue } = useIssue();
+  const { DRAG_ISSUE_INFO, DRAG_ENTER_ISSUE_INFO } = useSelector(state => state.issue);
+  const [update] = useUpdateTodoMutation();
 
   // 드래그 놓는 영역 만들기
   const onDragOver = e => {
@@ -16,8 +16,11 @@ const IssueContainer = ({ id, title, issueList }) => {
   // 드래그 놓을 때
   const onDrop = e => {
     e.preventDefault();
-    const dropState = e.currentTarget.id;
-    handlePatchIssue({ ...DRAG_ISSUE_INFO, state: dropState });
+
+    const dropState = e.currentTarget.closest('article').id;
+    console.log(DRAG_ENTER_ISSUE_INFO.id + ' ' + DRAG_ISSUE_INFO.id);
+    update({ ...DRAG_ISSUE_INFO, state: dropState, id: DRAG_ENTER_ISSUE_INFO.id });
+    update({ ...DRAG_ENTER_ISSUE_INFO, state: dropState, id: DRAG_ISSUE_INFO.id });
   };
 
   return (
