@@ -80,28 +80,72 @@ yarn start
 
 ### 1. Issue의 CRUD 구현 
 
-- 구현 조건
-  * 이슈의 상태는 “할 일”, “진행 중”, "완료”가 존재하며 칸반보드와 같이 상태별로 분류된다.
-  * 이슈 상태별 목록은 기본적으로 고유번호 순서대로 "오름차순" 정렬한다.
-  * 이슈는 각각 "고유번호, 제목, 내용, 마감일, 상태, 담당자"가 존재한다.
-  * 이슈의 작성 폼에서는 "제목, 내용, 마감일, 상태, 담당자"를 입력할 수 있다.
-    * 추가 조건: 담당자는 사전에 임의의 목록을 구성하고, 검색하여 담당자를 선택할 수 있도록 한다.
-  
+- **구현 조건**
+  * 이슈의 상태는 "할 일, 진행 중, 완료"가 존재하며 칸반보드와 같이 **상태별로 분류**된다.
+  * 이슈 상태별 목록은 기본적으로 고유번호 순서대로 **오름차순** 정렬한다.
+  * 이슈는 각각 **고유번호, 제목, 내용, 마감일, 상태, 담당자**가 존재한다.
+  * 이슈의 작성 폼에서는 **제목, 내용, 마감일, 상태, 담당자**를 입력할 수 있다.  
+    ➡️ 추가 조건: **담당자**는 사전에 임의의 목록을 구성하고, **검색**하여 담당자를 선택할 수 있도록 한다.
+  * 각 이슈를 클릭 시 **상세정보 창**이 표시되며, 정보를 **수정**하고 '저장'버튼을 통해 저장할 수 있도록 한다.
+
 
 **Component**
-* 구현에 필요한 common 컴포넌트를 정의 및 구현
+
+* Modal을 사용하여 각 이슈의 '상세정보 창'과 '작성 폼'을 구현
+  * **IssueAddModal.js** 에서 Issue를 **Create**
+  * **IssueDetailModal.js** 에서 Issue를 **Update**  
 
 
 ```javascript
-코드 넣을 곳
+const Main = () => {
+...
+  const { ISSUE_LIST, SHOW_ISSUE_DETAIL_FLAG, SHOW_ADD_ISSUE_FLAG } = useSelector(state => state.issue);
+...
+  return (
+    <>
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : isSuccess ? (
+        <>
+          <MainWrapper>
+            <IssueContainer id="todo" title={'할 일'} issueList={ISSUE_LIST.TODOS} />
+            <IssueContainer id="working" title={'작업 중'} issueList={ISSUE_LIST.WORKINGS} />
+            <IssueContainer id="complete" title={'완료'} issueList={ISSUE_LIST.COMPLETES} />
+          </MainWrapper>
+          <ShowAddIssue onClick={onClickAddIssueModal}>이슈 추가하기</ShowAddIssue>
+          {SHOW_ISSUE_DETAIL_FLAG && <IssueDetailModal />}
+          {SHOW_ADD_ISSUE_FLAG && <IssueAddModal />}
+        </>
+      ) : null}
+    </>
+  );
+};
 ```
-**Hooks**
-* custom hook으로 SignIn/SignUp 컴포넌트의 input의 이벤트와 값의 valid, 에러 메시지 등을 핸들링
 
+* 임의의 담당자목록을 배열로 만든 후, filter를 사용하여 검색 기능을 구현
 ```javascript
-코드 넣을 곳
+const InputPerson = () => {
+...
+  const [searchResult, setSearchResult] = useState([]);
 
+  // 담당자 이름 바뀔 시 담당자 검색
+  useEffect(() => {
+    const filterPerson = PERSON.filter(name => name.includes(person));
+    setSearchResult(filterPerson);
+  }, [person]);
 
+  return (
+    <>
+...
+        <PersonContainer>
+          {searchResult.map(person => (
+            <PersonDiv key={person}>{person}</PersonDiv>
+          ))}
+        </PersonContainer>
+      )
+    </>
+  
+};
 ```
 
 <br>
