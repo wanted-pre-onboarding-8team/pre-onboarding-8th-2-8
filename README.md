@@ -175,19 +175,31 @@ const InputPerson = () => {
 ### 3. 데이터가 로딩 중일 때, UX를 고려한 UI 구현
 
   * 데이터를 처리하는 중,
+    - RTK Query 를 사용하여 isLoading 시점에 LoadingSpinner 컴포넌트를 렌더링 해줘 데이터가 로딩된다는 인식을 유저에게 주어 이탈률을 줄일 수 있는 방식으로 UX 를 고려 하였습니다.
+
 
 **Component**
 * 구현에 필요한 common 컴포넌트를 정의 및 구현
 
-
 ```javascript
-코드 넣을 곳
-```
-**Hooks**
-* useInput custom hook으로 SignIn/SignUp 컴포넌트의 input의 이벤트와 값의 valid, 에러 메시지 등을 핸들링
-
-```javascript
-코드 넣을 곳
+return (
+    <>
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : isSuccess ? (
+        <>
+          <MainWrapper>
+            <IssueContainer id="todo" title={'할 일'} issueList={ISSUE_LIST.TODOS} />
+            <IssueContainer id="working" title={'작업 중'} issueList={ISSUE_LIST.WORKINGS} />
+            <IssueContainer id="complete" title={'완료'} issueList={ISSUE_LIST.COMPLETES} />
+          </MainWrapper>
+          <ShowAddIssue onClick={onClickAddIssueModal}>이슈 추가하기</ShowAddIssue>
+          {SHOW_ISSUE_DETAIL_FLAG && <IssueDetailModal />}
+          {SHOW_ADD_ISSUE_FLAG && <IssueAddModal />}
+        </>
+      ) : null}
+    </>
+  );
 
 ```
 
