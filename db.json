@@ -17,11 +17,19 @@
       "person": "perso"
     },
     {
+      "id": 4,
+      "title": "3",
+      "contents": "33",
+      "deadline": "2023-01-06T16:17",
+      "state": "complete",
+      "person": "3"
+    },
+    {
       "id": 8,
       "title": "8",
       "contents": "8",
       "deadline": "2023-01-06T13:54",
-      "state": "complete",
+      "state": "working",
       "person": "8"
     }
   ]
