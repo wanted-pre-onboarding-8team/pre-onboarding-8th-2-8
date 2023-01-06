@@ -16,8 +16,6 @@
     - [1. Issue의 CRUD 구현 ](#1-issue의-crud-구현)
     - [2. Drag & Drop 이벤트를 활용한 Issue의 순서 변경](#2-drag--drop-이벤트를-활용한-issue의-순서-변경)
     - [3. 데이터가 로딩 중일 때, UX를 고려한 UI 구현](#3-데이터가-로딩-중일-때-ux를-고려한-ui-구현)
-    - [4. 사용자의 중복 액션을 방지하기 위한 딜레이 적용](#4-사용자의-중복-액션을-방지하기-위한-딜레이-적용)
-    - [5. 에러를 고려한 처리 방법](#5-에러를-고려한-처리)
 
 <br>
 
@@ -37,7 +35,6 @@
 <img src="https://img.shields.io/badge/Redux-7347B6?style=for-the-badge&logo=Redux&logoColor=white" />
 <img src="https://img.shields.io/badge/styled components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white" />
 <img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white" />
-<img src="https://img.shields.io/badge/ReactRouter-CA4245?style=for-the-badge&logo=react-router&logoColor=white" />  
   
 <br/>
 <img src="https://img.shields.io/badge/eslint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white" />
