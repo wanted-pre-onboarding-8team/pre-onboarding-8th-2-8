@@ -1,4 +1,4 @@
-import { addIssue, getIssue, patchIssue } from 'apis/issue';
+import { addIssue, deleteIssue, getIssue, patchIssue } from 'apis/issue';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_ISSUE_DETAIL, SET_ISSUE_LIST } from 'slices/issueSlice';
 
@@ -10,6 +10,7 @@ const useIssue = () => {
   const handleGetIssue = () => {
     getIssue().then(res => {
       const issueList = res.data;
+      console.log(issueList);
       // state에 따라 나누기
       dispatch(
         SET_ISSUE_LIST({
@@ -42,8 +43,12 @@ const useIssue = () => {
   const handlePatchIssue = changePoint => {
     patchIssue(changePoint).then(() => handleGetIssue());
   };
+  // 이슈 삭제 CRUD - D
+  const handleDeleteIssue = id => {
+    deleteIssue(id).then(() => handleGetIssue());
+  };
 
-  return { handleGetIssue, handleShowDetailIssue, handleAddIssue, handlePatchIssue };
+  return { handleGetIssue, handleShowDetailIssue, handleAddIssue, handlePatchIssue, handleDeleteIssue };
 };
 
 export default useIssue;

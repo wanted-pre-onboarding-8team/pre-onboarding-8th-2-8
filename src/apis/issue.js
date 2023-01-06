@@ -11,3 +11,7 @@ export const addIssue = async issue => {
 export const patchIssue = async changePoint => {
   return await client.patch(`/issueList/${changePoint.id}`, changePoint);
 };
+
+export const deleteIssue = async id => {
+  return await client.delete(`/issueList/${id}`);
+};
