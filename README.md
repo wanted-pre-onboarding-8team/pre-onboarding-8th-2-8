@@ -35,7 +35,6 @@
 <div align="center">
   
 <img src="https://img.shields.io/badge/Redux-7347B6?style=for-the-badge&logo=Redux&logoColor=white" />
-<img src="https://img.shields.io/badge/React Query-FF4154?style=for-the-badge&logo=Redux&logoColor=white" />
 <img src="https://img.shields.io/badge/styled components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white" />
 <img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white" />
 <img src="https://img.shields.io/badge/ReactRouter-CA4245?style=for-the-badge&logo=react-router&logoColor=white" />  
@@ -50,7 +49,10 @@
 ## 🏃‍♂️ 실행방법
 ----
 ```
+
 yarn start
+yarn server
+
 ```
 
 <br>
@@ -296,49 +298,3 @@ return (
 ```
 
 <br>
-
-### 4. 사용자의 중복 액션을 방지하기 위한 딜레이 적용
-
-  * 이슈 목록에서 마우스의 Drag & Drop 이벤트를 활용해 이슈의 순서를 변경할 수 있다. 
-    * 변경된 순서는 고유번호순 정렬보다 우선해서 적용된다.
-
-**Component**
-* 구현에 필요한 common 컴포넌트를 정의 및 구현
-
-
-```javascript
-코드 넣을 곳
-```
-**Hooks**
-* useInput custom hook으로 SignIn/SignUp 컴포넌트의 input의 이벤트와 값의 valid, 에러 메시지 등을 핸들링
-
-```javascript
-코드 넣을 곳
-
-```
-
-<br>
-
-### 5. 에러를 고려한 처리
-
-  * 이슈 목록에서 마우스의 Drag & Drop 이벤트를 활용해 이슈의 순서를 변경할 수 있다. 
-
-
-**Component**
-* 구현에 필요한 common 컴포넌트를 정의 및 구현
-
-
-```javascript
-코드 넣을 곳
-```
-**Hooks**
-* useInput custom hook으로 SignIn/SignUp 컴포넌트의 input의 이벤트와 값의 valid, 에러 메시지 등을 핸들링
-
-```javascript
-코드 넣을 곳
-
-```
-
-<br>
-
-
