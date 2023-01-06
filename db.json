@@ -33,20 +33,52 @@
   ],
   "issueList": [
     {
+      "id": 1,
+      "title": "1",
+      "content": "1",
+      "dueDate": "2023-01-19T18:46",
+      "status": "DONE",
+      "owner": "Hyojin Kwon"
+    },
+    {
       "id": 2,
-      "title": "asdsdasdsada",
-      "content": "asdasdasda",
-      "dueDate": "2023-01-06T11:51",
-      "status": "TODOS",
+      "title": "d",
+      "content": "sdf",
+      "dueDate": "",
+      "status": "IN PROGRESS",
+      "owner": "MinKyung Shin"
+    },
+    {
+      "id": 6,
+      "title": "1",
+      "content": "1",
+      "dueDate": "2023-01-19T18:46",
+      "status": "IN PROGRESS",
       "owner": "Keonhee Lee"
     },
     {
       "id": 3,
-      "title": "asdasd",
-      "content": "asdasd",
-      "dueDate": "2023-01-06T11:54",
+      "title": "d",
+      "content": "sdf",
+      "dueDate": "",
       "status": "TODOS",
       "owner": "Keonhee Lee"
+    },
+    {
+      "id": 4,
+      "title": "1",
+      "content": "1",
+      "dueDate": "2023-01-19T18:46",
+      "status": "IN PROGRESS",
+      "owner": "Heesoo Kim"
+    },
+    {
+      "id": 5,
+      "title": "d",
+      "content": "sdf",
+      "dueDate": "",
+      "status": "TODOS",
+      "owner": "Hyojin Kwon"
     }
   ]
 }

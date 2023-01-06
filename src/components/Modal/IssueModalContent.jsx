@@ -1,18 +1,20 @@
 import { useUpdateTodoMutation } from 'apis/apiSlice';
-import { AutoComplete, Avatar, Button, Flex, Form } from 'components/@commons';
+import { Avatar, Button, Input } from 'components/@commons';
 import { useForm, useModal } from 'hooks';
 
+import BodyContent from './Content/BodyContent';
+import SideContent from './Content/SideContent';
+import UsersList from './Content/UsersList';
 import * as S from './Modal.style';
-import UsersList from './UsersList';
 
 const IssueModalContent = ({ todos, users }) => {
   const { currentIssueId, handleUnmountModal } = useModal();
   const todo = todos?.find(todo => todo.id === currentIssueId);
-  const { content, dueDate, owner, status, title } = todo;
+  const { content, dueDate, owner, title } = todo;
   const { formData, handleChange, handleSubmit } = useForm({ title, content });
 
   const [updateTodo] = useUpdateTodoMutation();
-  const handleUpdateTodo = () => updateTodo({ ...todo, ...formData });
+  const handleUpdateTodo = () => updateTodo({ ...todo, ...formData, owner });
 
   return (
     <div>
@@ -21,44 +23,32 @@ const IssueModalContent = ({ todos, users }) => {
       </S.Header>
       <S.BodyContainer>
         <S.BodyLeft>
-          <div>
-            <Form
-              inputProps={{
+          <BodyContent
+            formProps={{
+              inputProps: {
                 type: 'text',
                 label: 'title',
                 name: 'title',
                 value: formData.title,
                 onChange: handleChange,
-              }}
-              textAreaProps={{
+              },
+              textAreaProps: {
                 label: 'content',
                 name: 'content',
                 value: formData.content,
                 onChange: handleChange,
-              }}
-            />
-          </div>
-          <span>{dueDate}</span>
+              },
+            }}
+            dateComponent={<Input label="Due Date" name="Due Date" type="text" value={dueDate} readonly disabled />}
+          />
         </S.BodyLeft>
         <S.BodyRight>
-          <Flex flexDirection="column" alignItems="center" css={{ marginBottom: '100px' }}>
-            <span>현재 상태</span>
-            <span>{status}</span>
-          </Flex>
-          <Flex flexDirection="column" alignItems="center">
-            <span>담당자 선택</span>
-            <AutoComplete list={users} ListComponent={UsersList} todo={todo} />
-          </Flex>
-
-          <Flex
-            flexDirection="column"
-            justifyContent="flex-end"
-            alignItems="center"
-            css={{ position: 'absolute', bottom: '80px', right: '40px' }}
-          >
-            <span>{owner}</span>
-            <Avatar users={users} owner={owner} />
-          </Flex>
+          <SideContent
+            users={users}
+            todo={todo}
+            AvatarComponent={<Avatar users={users} owner={owner} />}
+            ListComponent={UsersList}
+          />
         </S.BodyRight>
       </S.BodyContainer>
       <S.Footer>

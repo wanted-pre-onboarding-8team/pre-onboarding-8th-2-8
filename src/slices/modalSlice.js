@@ -11,14 +11,10 @@ const modalSlice = createSlice({
     showCreateModal: state => {
       state.createModalOpen = true;
       state.issueModalOpen = false;
-
-      console.log('createModal');
     },
     showIssueModal: state => {
       state.issueModalOpen = true;
       state.createModalOpen = false;
-
-      console.log('issueModal');
     },
     hideModal: state => {
       state.issueModalOpen = false;

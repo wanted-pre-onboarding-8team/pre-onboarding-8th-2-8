@@ -24,7 +24,8 @@ const AutoComplete = ({ list, todo, ListComponent }) => {
           ) : (
             filteredList.map((item, idx) => (
               <ListComponent
-                key={list.userId ? list.userId : idx}
+                // key={list.userId ? list.userId : idx}
+                key={Math.random() * idx}
                 item={item}
                 users={list}
                 todo={todo}
