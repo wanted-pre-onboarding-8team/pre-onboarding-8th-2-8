@@ -45,12 +45,17 @@
 
 ## 🏃‍♂️ 실행방법
 ----
+- 의존성 package 설치
 ```
-
 yarn
+```
+- 브라우저 실행
+```
 yarn start
+```
+- json-server 실행
+```
 yarn server
-
 ```
 
 <br>
@@ -157,7 +162,7 @@ const InputPerson = () => {
     * 변경된 순서는 고유번호순 정렬보다 우선해서 적용된다.
 
 **Component**
-* 구현에 필요한 common 컴포넌트를 정의 및 구현
+
 
 
 ```javascript
@@ -237,7 +242,7 @@ const IssueList = ({ issueInfo }) => {
 
 ```
 **api**
-* useInput custom hook으로 SignIn/SignUp 컴포넌트의 input의 이벤트와 값의 valid, 에러 메시지 등을 핸들링
+
 ```javascript
 
 // apis 폴더 apiSlice.js의 코드
