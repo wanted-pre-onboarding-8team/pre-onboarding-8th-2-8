@@ -2,27 +2,43 @@
   "issueList": [
     {
       "id": 1,
-      "title": "5",
+      "title": "3",
       "contents": "5",
       "deadline": "2023-01-06T20:20",
       "state": "complete",
-      "person": "5"
+      "person": "3"
     },
     {
       "id": 8,
-      "title": "6",
-      "contents": "6",
-      "deadline": "2023-01-06T20:20",
-      "state": "complete",
-      "person": "6"
-    },
-    {
-      "id": 9,
       "title": "5",
       "contents": "5",
       "deadline": "2023-01-06T20:20",
       "state": "complete",
       "person": "5"
+    },
+    {
+      "id": 9,
+      "title": "6",
+      "contents": "6",
+      "deadline": "2023-01-06T20:20",
+      "state": "working",
+      "person": "6"
+    },
+    {
+      "id": 12,
+      "title": "6",
+      "contents": "6",
+      "deadline": "2023-01-06T20:20",
+      "state": "working",
+      "person": "6"
+    },
+    {
+      "id": 13,
+      "title": "6",
+      "contents": "6",
+      "deadline": "2023-01-06T20:20",
+      "state": "working",
+      "person": "6"
     },
     {
       "id": 10,
