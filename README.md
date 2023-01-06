@@ -161,14 +161,106 @@ const InputPerson = () => {
 
 
 ```javascript
-코드 넣을 곳
-```
-**Hooks**
-* useInput custom hook으로 SignIn/SignUp 컴포넌트의 input의 이벤트와 값의 valid, 에러 메시지 등을 핸들링
-```javascript
-코드 넣을 곳
+
+// 이슈 리스트들을 담는 컨테이너 컴포넌트
+const IssueContainer = ({ id, title, issueList }) => {
+  const { DRAG_ISSUE_INFO, DRAG_ENTER_ISSUE_INFO } = useSelector(state => state.issue);
+  const [update] = useUpdateTodoMutation();
+
+  // 드래그 놓는 영역 만들기
+  const onDragOver = e => {
+    e.preventDefault();
+  };
+  // 드래그 놓을 때
+  const onDrop = e => {
+    e.preventDefault();
+
+    const dropState = e.currentTarget.closest('article').id;
+    console.log(DRAG_ENTER_ISSUE_INFO.id + ' ' + DRAG_ISSUE_INFO.id);
+    update({ ...DRAG_ISSUE_INFO, state: dropState, id: DRAG_ENTER_ISSUE_INFO.id });
+    update({ ...DRAG_ENTER_ISSUE_INFO, state: dropState, id: DRAG_ISSUE_INFO.id });
+  };
+
+  return (
+    <Container id={id} onDragOver={onDragOver} onDrop={onDrop}>
+      <Title>{title}</Title>
+      {issueList.map(issue => (
+        <IssueList key={issue.id} issueInfo={issue} />
+      ))}
+    </Container>
+  );
+};
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+// 각 이슈를 보여주는 컴포넌트
+const IssueList = ({ issueInfo }) => {
+  const dispatch = useDispatch();
+  const { id, title, contents, deadline, state, person } = issueInfo;
+  const { handleShowDetailIssue } = useIssue();
+  const [removeIssue] = useDeleteTodoMutation();
+
+  // 클릭 시 이슈의 상세정보를 보여줌
+  const onShowDetail = () => {
+    handleShowDetailIssue(id, state);
+    dispatch(SET_SHOW_ISSUE_DETAIL_FLAG(true));
+  };
+  // 이슈 삭제 이벤트
+  const onRemoveIssue = () => {
+    removeIssue(id);
+  };
+
+  // 드래그 시작
+  const onDragStart = e => {
+    e.dataTransfer.effectAllowed = 'move';
+    dispatch(SET_DRAG_ISSUE_INFO(issueInfo));
+  };
+  // 드래그 겹칠 시
+  const onDragEnter = () => {
+    dispatch(SET_DRAG_ENTER_ISSUE_INFO(issueInfo));
+  };
+
+  return (
+    <ListWrapper>
+      <List onDragEnter={onDragEnter} onClick={onShowDetail} onDragStart={onDragStart} draggable>
+        <div>고유번호 : {id}</div>
+        <div>제목 : {title}</div>
+        <div>내용 : {contents}</div>
+        <div>마감일 : {deadline}</div>
+        <div>상태 : {state}</div>
+        <div>담당자 : {person}</div>
+      </List>
+      <RemoveButton onClick={onRemoveIssue}>삭제</RemoveButton>
+    </ListWrapper>
+  );
+};
 
 ```
+**api**
+* useInput custom hook으로 SignIn/SignUp 컴포넌트의 input의 이벤트와 값의 valid, 에러 메시지 등을 핸들링
+```javascript
+
+// apis 폴더 apiSlice.js의 코드
+// Issue를 
+updateTodo: builder.mutation({
+      query: todo => ({
+        url: `/issueList/${todo.id}`,
+        method: 'PATCH',
+        body: todo,
+      }),
+      invalidatesTags: ['Todos'],
+    }),
+
+```
+
+**Logic**  
+
+세로방향 교환
+* 드래그 시작 시 컴포넌트를 1, 1과 겹친 컴포넌트를 2라고 지칭
+* 1과 2를 비교하여 id 값을 제외한 값을 교체하여 순서 변경
+  
+가로방향 교환
+* 1이 드롭한 부모 컴포넌트의 id값(todo, working, complete)를 가져와 1의 상태를 patch
 
 <br>
 
