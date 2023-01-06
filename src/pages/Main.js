@@ -1,21 +1,22 @@
+import { useGetTodosQuery } from 'apis/apiSlice';
 import IssueContainer from 'components/IssueContainer';
+import LoadingSpinner from 'components/LoadingSpinner';
 import IssueAddModal from 'components/Modal/IssueAddModal';
 import IssueDetailModal from 'components/Modal/IssueDetailModal';
-import useIssue from 'hooks/useIssue';
-import React, { Suspense, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_ADD_ISSUE_FLAG } from 'slices/issueSlice';
+import { SET_ADD_ISSUE_FLAG, SET_ISSUE_LIST } from 'slices/issueSlice';
 import styled from 'styled-components';
 
 const Main = () => {
   const dispatch = useDispatch();
-  const { handleGetIssue } = useIssue();
   const { ISSUE_LIST, SHOW_ISSUE_DETAIL_FLAG, SHOW_ADD_ISSUE_FLAG } = useSelector(state => state.issue);
+  const { data: issueList, isLoading, isSuccess } = useGetTodosQuery();
 
   // 첫 렌더링 시 이슈 가져오기
   useEffect(() => {
-    handleGetIssue();
-  }, []);
+    if (isSuccess) dispatch(SET_ISSUE_LIST(issueList));
+  }, [issueList]);
 
   // 이슈 추가 창 띄우기
   const onClickAddIssueModal = () => {
@@ -23,16 +24,22 @@ const Main = () => {
   };
 
   return (
-    <Suspense fallback={'...Loading'}>
-      <MainWrapper>
-        <IssueContainer id="todo" title={'할 일'} issueList={ISSUE_LIST.TODOS} />
-        <IssueContainer id="working" title={'작업 중'} issueList={ISSUE_LIST.WORKINGS} />
-        <IssueContainer id="complete" title={'완료'} issueList={ISSUE_LIST.COMPLETES} />
-      </MainWrapper>
-      <ShowAddIssue onClick={onClickAddIssueModal}>이슈 추가하기</ShowAddIssue>
-      {SHOW_ISSUE_DETAIL_FLAG && <IssueDetailModal />}
-      {SHOW_ADD_ISSUE_FLAG && <IssueAddModal />}
-    </Suspense>
+    <>
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : isSuccess ? (
+        <>
+          <MainWrapper>
+            <IssueContainer id="todo" title={'할 일'} issueList={ISSUE_LIST.TODOS} />
+            <IssueContainer id="working" title={'작업 중'} issueList={ISSUE_LIST.WORKINGS} />
+            <IssueContainer id="complete" title={'완료'} issueList={ISSUE_LIST.COMPLETES} />
+          </MainWrapper>
+          <ShowAddIssue onClick={onClickAddIssueModal}>이슈 추가하기</ShowAddIssue>
+          {SHOW_ISSUE_DETAIL_FLAG && <IssueDetailModal />}
+          {SHOW_ADD_ISSUE_FLAG && <IssueAddModal />}
+        </>
+      ) : null}
+    </>
   );
 };
 

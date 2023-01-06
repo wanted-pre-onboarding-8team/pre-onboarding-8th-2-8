@@ -14,7 +14,6 @@ export const apiSlice = createApi({
         method: 'POST',
         body: todo,
       }),
-      // transformResponse: todos => todos.sort((a, b) => a.id - b.id),
       invalidatesTags: ['Todos'],
     }),
     updateTodo: builder.mutation({
