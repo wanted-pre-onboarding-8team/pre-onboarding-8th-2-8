@@ -1,6 +1,6 @@
 import { useUpdateTodoMutation } from 'apis/apiSlice';
 import React, { useEffect } from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { SET_SHOW_ISSUE_DETAIL_FLAG } from 'slices/issueSlice';
 import styled from 'styled-components';
 import utilClickOutside from 'utils/utilClickOutside';
@@ -14,8 +14,8 @@ import S from './Modal.Styled';
 const IssueDetailModal = () => {
   const dispatch = useDispatch();
   const { modalRef, handleClickOutside } = utilClickOutside();
-  const { ISSUE_DETAIL } = useSelector(state => state.issue, shallowEqual);
-  const { update } = useUpdateTodoMutation();
+  const { ISSUE_DETAIL } = useSelector(state => state.issue);
+  const [update] = useUpdateTodoMutation();
 
   // 이슈 모달 창 외부 클릭 시 모달 창 끄기 이벤트 등록 및 삭제
   useEffect(() => {
